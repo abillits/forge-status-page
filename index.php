@@ -114,6 +114,40 @@ $data .= '
 //configure script
 $timeout = "1";
 
+//set service checks
+/*
+The script will open a socket to the following service to test for connection.
+Does not test the fucntionality, just the ability to connect
+Each service can have a name, port and the Unix domain it run on (default to localhost)
+*/
+
+
+//begin table for status
+$data .= "<small><table  class='table table-striped table-sm '><thead><tr><th>Service</th><th>Port</th><th>Status</th></tr></thead>";
+foreach ($services  as $service) {
+	if($service['ip']==""){
+	   $service['ip'] = "localhost";
+	}
+	$data .= "<tr><td>" . $service['service'] . "</td><td>". $service['port'];
+
+	$fp = @fsockopen($service['ip'], $service['port'], $errno, $errstr, $timeout);
+	if (!$fp) {
+		$data .= "</td><td class='table-danger'>Offline </td></tr>";
+	  //fclose($fp);
+	} else {
+		$data .= "</td><td class='table-success'>Online</td></tr>";
+		fclose($fp);
+	}
+
+}
+//close table
+$data .= "</table></small>";
+$data .= '
+  </div>
+</div>
+';
+echo $data;
+
 
 /* =====================================================================
 //
@@ -222,6 +256,7 @@ head to get only the first few lines
 exec("ps -e k-rss -o rss,args | head -n $i", $tom_mem_arr, $status);
 exec("ps -e k-pcpu -o pcpu,args | head -n $i", $top_cpu_use, $status);
 
+print_r($tom_mem_arr);
 
 $top_mem = implode('<br/>', $tom_mem_arr );
 $top_mem = "<pre class='mb-0 '><code>" . $top_mem . "</code></pre>";
@@ -250,40 +285,6 @@ $data1 .= "</table>";
 // $data1 .= '  </div></div>';
 $data1 .= '  </div>';
 echo $data1;
-
-//set service checks
-/*
-The script will open a socket to the following service to test for connection.
-Does not test the fucntionality, just the ability to connect
-Each service can have a name, port and the Unix domain it run on (default to localhost)
-*/
-
-
-//begin table for status
-$data .= "<small><table  class='table table-striped table-sm '><thead><tr><th>Service</th><th>Port</th><th>Status</th></tr></thead>";
-foreach ($services  as $service) {
-	if($service['ip']==""){
-	   $service['ip'] = "localhost";
-	}
-	$data .= "<tr><td>" . $service['service'] . "</td><td>". $service['port'];
-
-	$fp = @fsockopen($service['ip'], $service['port'], $errno, $errstr, $timeout);
-	if (!$fp) {
-		$data .= "</td><td class='table-danger'>Offline </td></tr>";
-	  //fclose($fp);
-	} else {
-		$data .= "</td><td class='table-success'>Online</td></tr>";
-		fclose($fp);
-	}
-
-}
-//close table
-$data .= "</table></small>";
-$data .= '
-  </div>
-</div>
-';
-echo $data;
 
 /* =============================================================================
 *
