@@ -40,7 +40,7 @@ if (defined('DISKS')) {
     }
   }
 } else {
-  $disks[] = array("name" => "/home" , "path" => '/var/home');
+  $disks[] = array("name" => "/home" , "path" => '/home');
 }
 
 ?>
