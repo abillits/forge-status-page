@@ -258,7 +258,7 @@ exec("ps -e k-pcpu -o pcpu,args | head -n $i", $top_cpu_use, $status);
 
 foreach ($tom_mem_arr as $key => $tom_mem_arr_item) {
   $tom_mem_arr_item_pieces = explode(' ', $tom_mem_arr_item);
-  if (is_numeric($tom_mem_arr_item_piecesp[0])) {
+  if (is_numeric($tom_mem_arr_item_pieces[0])) {
     $tom_mem_arr[$key] = str_replace($tom_mem_arr_item_piecesp[0],getSymbolByQuantity($tom_mem_arr_item_piecesp[0]),$tom_mem_arr[$key]);
   }
 }
