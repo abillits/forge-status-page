@@ -37,7 +37,7 @@ if (defined('DISKS')) {
       $disk_pieces[1] = '/' . $disk_pieces[1];
       $disk_pieces[1] = str_replace('//','/',$disk_pieces[1]);
       if (file_exists($disk_pieces[1])) {
-        $disks[] = array("name" => $disk_pieces[0] , "path" => $disk_pieces[1]);  
+        $disks[] = array("name" => $disk_pieces[0] , "path" => $disk_pieces[1]);
       }
     }
   }
@@ -113,40 +113,6 @@ $data .= '
 
 //configure script
 $timeout = "1";
-
-//set service checks
-/*
-The script will open a socket to the following service to test for connection.
-Does not test the fucntionality, just the ability to connect
-Each service can have a name, port and the Unix domain it run on (default to localhost)
-*/
-
-
-//begin table for status
-$data .= "<small><table  class='table table-striped table-sm '><thead><tr><th>Service</th><th>Port</th><th>Status</th></tr></thead>";
-foreach ($services  as $service) {
-	if($service['ip']==""){
-	   $service['ip'] = "localhost";
-	}
-	$data .= "<tr><td>" . $service['service'] . "</td><td>". $service['port'];
-
-	$fp = @fsockopen($service['ip'], $service['port'], $errno, $errstr, $timeout);
-	if (!$fp) {
-		$data .= "</td><td class='table-danger'>Offline </td></tr>";
-	  //fclose($fp);
-	} else {
-		$data .= "</td><td class='table-success'>Online</td></tr>";
-		fclose($fp);
-	}
-
-}
-//close table
-$data .= "</table></small>";
-$data .= '
-  </div>
-</div>
-';
-echo $data;
 
 
 /* =====================================================================
@@ -284,6 +250,40 @@ $data1 .= "</table>";
 // $data1 .= '  </div></div>';
 $data1 .= '  </div>';
 echo $data1;
+
+//set service checks
+/*
+The script will open a socket to the following service to test for connection.
+Does not test the fucntionality, just the ability to connect
+Each service can have a name, port and the Unix domain it run on (default to localhost)
+*/
+
+
+//begin table for status
+$data .= "<small><table  class='table table-striped table-sm '><thead><tr><th>Service</th><th>Port</th><th>Status</th></tr></thead>";
+foreach ($services  as $service) {
+	if($service['ip']==""){
+	   $service['ip'] = "localhost";
+	}
+	$data .= "<tr><td>" . $service['service'] . "</td><td>". $service['port'];
+
+	$fp = @fsockopen($service['ip'], $service['port'], $errno, $errstr, $timeout);
+	if (!$fp) {
+		$data .= "</td><td class='table-danger'>Offline </td></tr>";
+	  //fclose($fp);
+	} else {
+		$data .= "</td><td class='table-success'>Online</td></tr>";
+		fclose($fp);
+	}
+
+}
+//close table
+$data .= "</table></small>";
+$data .= '
+  </div>
+</div>
+';
+echo $data;
 
 /* =============================================================================
 *
