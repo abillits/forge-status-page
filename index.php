@@ -282,11 +282,11 @@ $data1 .= "<tr><td>Uptime</td><td>$uptime                     </td></tr>";
 // $disks[] = array("name" => "Your disk name" , "path" => '/mount/point/to/that/disk') ;
 
 
-$data1 .= "<tr><td>Disk free        </td><td>" . get_disk_free_status($disks) . "</td></tr>";
+$data1 .= "<tr><td>Disk Free</td><td>" . get_disk_free_status($disks) . "</td></tr>";
 
-$data1 .= "<tr><td>RAM free        </td><td>". format_storage_info($total_mem *1024, $free_mem *1024, '') ."</td></tr>";
-$data1 .= "<tr><td>Top RAM user    </td><td><small>$top_mem</small></td></tr>";
-$data1 .= "<tr><td>Top CPU user    </td><td><small>$top_cpu</small></td></tr>";
+$data1 .= "<tr><td>RAM Free</td><td>". format_storage_info($total_mem *1024, $free_mem *1024, '') ."</td></tr>";
+$data1 .= "<tr><td>Top RAM Processes</td><td><small>$top_mem</small></td></tr>";
+$data1 .= "<tr><td>Top CPU Processes</td><td><small>$top_cpu</small></td></tr>";
 
 $data1 .= "</table>";
 // $data1 .= '  </div></div>';
