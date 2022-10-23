@@ -183,7 +183,7 @@ function getSymbolByQuantity($bytes) {
 	$symbol = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB');
 	$exp = floor(log($bytes)/log(1024));
 
-	return sprintf('%.2f<small>'.$symbol[$exp].'</small>', ($bytes/pow(1024, floor($exp))));
+	return sprintf('%.2f <small>'.$symbol[$exp].'</small>', ($bytes/pow(1024, floor($exp))));
 }
 function percent_to_color($p){
 	if($p < 30) return 'success';
@@ -196,7 +196,7 @@ function format_storage_info($disk_space, $disk_free, $disk_name){
 	$str = "";
 	$disk_free_precent = 100 - round($disk_free*1.0 / $disk_space*100, 2);
 		$str .= '<div class="col p-0 d-inline-flex">';
-		$str .= "<span class='mr-2'>" . badge($disk_name,'secondary') .' '. getSymbolByQuantity($disk_free) . '/'. getSymbolByQuantity($disk_space) ."</span>";
+		$str .= "<span class='mr-2'>" . badge($disk_name,'secondary') .' '. getSymbolByQuantity($disk_free) . ' / '. getSymbolByQuantity($disk_space) ."</span>";
 		$str .= '
 <div class="progress flex-grow-1 align-self-center">
   <div class="progress-bar progress-bar-striped progress-bar-animated ';
@@ -260,6 +260,8 @@ foreach ($tom_mem_arr as $key => $tom_mem_arr_item) {
   $tom_mem_arr_item_pieces = explode(' ', $tom_mem_arr_item);
   if (is_numeric($tom_mem_arr_item_pieces[0])) {
     $tom_mem_arr[$key] = str_replace($tom_mem_arr_item_pieces[0],getSymbolByQuantity($tom_mem_arr_item_pieces[0] * 1024),$tom_mem_arr[$key]);
+  } else {
+    $tom_mem_arr[$key] = str_replace('RSS','  USAGE',$tom_mem_arr[$key]);
   }
 }
 
