@@ -36,7 +36,9 @@ if (defined('DISKS')) {
     if (isset($disk_pieces[0]) && isset($disk_pieces[1])) {
       $disk_pieces[1] = '/' . $disk_pieces[1];
       $disk_pieces[1] = str_replace('//','/',$disk_pieces[1]);
-    $disks[] = array("name" => $disk_pieces[0] , "path" => $disk_pieces[1]);
+      if (file_exists($disk_pieces[1])) {
+        $disks[] = array("name" => $disk_pieces[0] , "path" => $disk_pieces[1]);  
+      }
     }
   }
 } else {
