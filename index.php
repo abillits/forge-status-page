@@ -1,4 +1,9 @@
 <?php
+/*
+Configure via environment variables:
+services=name,port|name2,port2,ip2|etc (IP/Host is optional - defaults to 'localhost')
+disks=name,path|name2,path2|etc
+*/
 if (file_exists('.env')) {
   $env_vars = file('.env');
   foreach($env_vars as $env_var) {
@@ -30,7 +35,7 @@ if (defined('SERVICES')) {
 }
 $disks = array();
 if (defined('DISKS')) {
-  $disks_pieces = explode('|', SERVICES);
+  $disks_pieces = explode('|', DISKS);
   foreach ($disks_pieces as $disks_piece) {
     $disk_pieces = explode(',', $disks_piece);
     if (isset($disk_pieces[0]) && isset($disk_pieces[1])) {
@@ -49,7 +54,7 @@ if (defined('DISKS')) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Server status</title>
+	<title>Server Status</title>
 	<meta content="text/html" charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
