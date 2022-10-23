@@ -110,7 +110,7 @@ $data = "";
 $data .= '
 <div class="card my-2">
   <h4 class="card-header text-center">
-    Service status
+    Service Status
   </h4>
   <div class="card-body pb-0">
 ';
@@ -165,7 +165,7 @@ $data1 = "";
 $data1 .= '
 <div class="card mb-2">
   <h4 class="card-header text-center">
-    Server information
+    Server Information
   </h4>
   <div class="card-body">
 ';
