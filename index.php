@@ -261,7 +261,7 @@ foreach ($tom_mem_arr as $key => $tom_mem_arr_item) {
   if (is_numeric($tom_mem_arr_item_pieces[0])) {
     $tom_mem_arr[$key] = str_replace($tom_mem_arr_item_pieces[0],getSymbolByQuantity($tom_mem_arr_item_pieces[0] * 1024),$tom_mem_arr[$key]);
   } else {
-    $tom_mem_arr[$key] = str_replace('RSS',' USAGE',$tom_mem_arr[$key]);
+    $tom_mem_arr[$key] = str_replace('RSS','  USAGE',$tom_mem_arr[$key]);
     $tom_mem_arr[$key] = str_replace('COMMAND','PROCESS',$tom_mem_arr[$key]);
   }
 }
