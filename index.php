@@ -1,8 +1,8 @@
 <?php
 /*
 Configure via environment variables:
-services=name,port|name2,port2,ip2|etc (IP/Host is optional - defaults to 'localhost')
-disks=name,path|name2,path2|etc
+services="name,port|name2,port2,ip2|etc" (IP/Host is optional - defaults to 'localhost')\
+disks="name,path|name2,path2|etc"
 */
 if (file_exists('.env')) {
   $env_vars = file('.env');
@@ -16,7 +16,7 @@ if (file_exists('.env')) {
 }
 $services = array();
 if (defined('SERVICES')) {
-  $services_pieces = explode('|', SERVICES);
+  $services_pieces = explode('|', str_replace('"',''SERVICES));
   foreach ($services_pieces as $services_piece) {
     $service_pieces = explode(',', $services_piece);
     if (isset($service_pieces[0]) && isset($service_pieces[1])) {
@@ -35,7 +35,7 @@ if (defined('SERVICES')) {
 }
 $disks = array();
 if (defined('DISKS')) {
-  $disks_pieces = explode('|', DISKS);
+  $disks_pieces = explode('|', str_replace('"',''DISKS));
   foreach ($disks_pieces as $disks_piece) {
     $disk_pieces = explode(',', $disks_piece);
     if (isset($disk_pieces[0]) && isset($disk_pieces[1])) {
